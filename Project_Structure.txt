@@ -1,0 +1,14 @@
+littlehelper/
+  README.md
+  .gitignore
+  pyproject.toml
+  src/
+    littlehelper/
+      __init__.py
+      cli.py
+      config.py
+      llm/
+        __init__.py
+        ollama_client.py
+  tests/
+    test_ollama_client.py

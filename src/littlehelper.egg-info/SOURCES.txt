@@ -1,0 +1,13 @@
+pyproject.toml
+src/littlehelper/__init__.py
+src/littlehelper/cli.py
+src/littlehelper/config.py
+src/littlehelper.egg-info/PKG-INFO
+src/littlehelper.egg-info/SOURCES.txt
+src/littlehelper.egg-info/dependency_links.txt
+src/littlehelper.egg-info/entry_points.txt
+src/littlehelper.egg-info/requires.txt
+src/littlehelper.egg-info/top_level.txt
+src/littlehelper/llm/__init__.py
+src/littlehelper/llm/ollama_client.py
+tests/test_ollama_client.py
