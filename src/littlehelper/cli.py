@@ -1,34 +1,38 @@
 import argparse
-import sys
 
 from littlehelper.config import settings
 from littlehelper.llm.ollama_client import OllamaClient
+from littlehelper.system.ollama_control import stop_all_models
 
-DEFAULT_SYSTEM = (
-    "You are little helper named voyd. Please be concise, accurate, action-oriented but mostly friendly. "
-    "If you are unsure, ask one clarifying question."
-)
+DEFAULT_SYSTEM = "You are LittleHelper named voyd. Be concise, accurate, practical and above all friendly."
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(prog="littlehelper")
-    sub = parser.add_subparsers(dest="cmd", required=True)
-
-    ask = sub.add_parser("ask", help="Send a prompt to the local model.")
-    ask.add_argument("prompt", help="The text prompt to send")
-    ask.add_argument("--model", default=settings.model, help="Model name (default from config).")
-    ask.add_argument("--host", default=settings.ollama_host, help="Ollama host URL")
-    ask.add_argument("--no-system", action="store_true", help="Disable system instruction.")
-
+    parser = argparse.ArgumentParser(prog="voyd")
+    parser.add_argument(
+        "text",
+        nargs="*",
+        help='Prompt text to send. Special command: "exit" to stop Ollama.'
+    )
     args = parser.parse_args(argv)
 
-    if args.cmd == "ask"
-        client = OllamaClient(host=args.host, timeout_s = settings.timeout_s)
-        system = None if args.no_system else DEFAULT_SYSTEM
-        model = args.model or settings.model
-        out = client.generate(model=model, prompt=args.prompt, system=system)
-        print(out.strip())
+    # No args at all -> show help
+    if not args.text:
+        parser.print_help()
         return 1
 
-if __name__ == "__main__":
-    raise systemExit(main())
+    # Special command: voyd exit
+    if len(args.text) == 1 and args.text[0].lower() == "exit":
+        print(stop_all_models())
+        return 0
 
+    # Otherwise: everything is the prompt
+    prompt = " ".join(args.text)
+
+    client = OllamaClient(settings.ollama_host, settings.timeout_s)
+    output = client.generate(
+        model=settings.model,
+        prompt=prompt,
+        system=DEFAULT_SYSTEM
+    )
+    print(output.strip())
+    return 0

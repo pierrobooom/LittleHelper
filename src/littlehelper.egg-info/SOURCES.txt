@@ -10,4 +10,5 @@ src/littlehelper.egg-info/requires.txt
 src/littlehelper.egg-info/top_level.txt
 src/littlehelper/llm/__init__.py
 src/littlehelper/llm/ollama_client.py
+src/littlehelper/system/ollama_control.py
 tests/test_ollama_client.py

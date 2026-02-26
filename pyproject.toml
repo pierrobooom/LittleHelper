@@ -1,14 +1,11 @@
 [project]
 name = "littlehelper"
 version = "0.1.0"
-description = "Local-first personal assistant"
 requires-python = ">=3.10"
-dependencies = [
-  "requests>=2.31.0"
-]
+dependencies = ["requests"]
 
 [project.scripts]
-littlehelper = "littlehelper.cli:main"
+voyd = "littlehelper.cli:main"
 
 [build-system]
 requires = ["setuptools>=68"]

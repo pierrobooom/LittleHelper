@@ -1,2 +1,2 @@
 [console_scripts]
-littlehelper = littlehelper.cli:main
+voyd = littlehelper.cli:main
