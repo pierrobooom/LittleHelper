@@ -19,6 +19,9 @@ class OllamaClient:
             payload["system"] = system
 
         r = requests.post(url, json=payload, timeout=self.timeout_s)
-        r.raise_for_status()
+        if not r.ok:
+            raise RuntimeError(
+                f"Request failed with status {r.status_code}: {r.text}"
+            )
         data = r.json()
         return data.get("response", "")
